@@ -47,7 +47,7 @@ func demonstrateErrors() {
 	err = createUser("not-an-email")
 	var ve *ValidationError
 	if errors.As(err, &ve) {
-		fmt.Printf("Validation error on field %s\n", ve.Field)
+		fmt.Printf("Validation error on field %q\n", ve.Field)
 	}
 
 	err = createUser("a@b.com")
@@ -63,7 +63,7 @@ func demonstrateDefer() {
 }
 
 func readWithDefer() error {
-	f, err := os.CreateTemp("", "go-study-*.txt")
+	f, err := os.CreateTemp("./", "go-study-*.txt")
 	if err != nil {
 		return err
 	}
