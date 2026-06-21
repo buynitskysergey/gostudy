@@ -25,7 +25,7 @@ func demonstrateValueVsPointer() {
 
 	// Явная передача
 	changeEmailByValue(u, "value@example.com")
-	fmt.Println("after changeEmailByValue:", u.Email) // не изменился
+	fmt.Println("but after changeEmailByValue u.Email is still:", u.Email) // не изменился
 
 	changeEmailByPointer(&u, "pointer@example.com")
 	fmt.Println("after changeEmailByPointer:", u.Email) // изменился
@@ -33,6 +33,7 @@ func demonstrateValueVsPointer() {
 
 func changeEmailByValue(u User, email string) {
 	u.Email = email // копия
+	fmt.Println("in changeEmailByValue", u.Email)
 }
 
 func changeEmailByPointer(u *User, email string) {
