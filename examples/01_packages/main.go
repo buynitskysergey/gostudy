@@ -13,5 +13,5 @@ func main() {
 	fmt.Println(greeter.Greet("Architect!"))
 	fmt.Println("Package greeter version:", greeter.Version)
 
-	greeter.format("x")// — ошибка компиляции: unexported
+	// greeter.format("x")// — ошибка компиляции: unexported
 }
