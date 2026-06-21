@@ -1,61 +1,70 @@
-# Go: философия языка (этап 1)
+# Go Study — от PHP/JS архитектора к production-ready Go
 
-Материалы для разработчика с опытом PHP/JS, который хочет сразу думать «по-Go», а не проходить путь новичка.
+Учебный репозиторий для освоения Go без «пути новичка». Каждая глава — теория (`.md`) + runnable примеры.
 
-## Ключевые идеи Go
+## Структура
 
-| Идея | Что это значит на практике |
-|------|---------------------------|
-| **Простота** | Мало синтаксиса, мало «магии». Явность важнее краткости. |
-| **Явность** | Ошибки возвращаются явно, не через exceptions. Типы видны сразу. |
-| **Композиция** | Нет классов и наследования. Поведение собирается из маленьких типов и интерфейсов. |
-| **Интерфейсы неявные** | Тип реализует интерфейс автоматически — достаточно иметь нужные методы. |
-| **Маленькие пакеты** | Код организуется по **пакетам** (единицам компиляции), а не по классам. |
-| **Один способ сделать вещь** | Обычно один идиоматичный путь: `if err != nil`, `range`, `defer`. |
+```
+study1/
+├── go.mod
+├── README.md
+├── Chapter1/          ← Этап 1: философия языка
+│   ├── README.md
+│   ├── 01_…06_*.md
+│   └── examples/
+└── Chapter2/          ← Этап 2: идиоматичный Go
+    ├── README.md
+    ├── 01_…07_*.md
+    └── examples/
+        ├── 01_contracts/ … 07_context/
+        └── app/             ← мини-приложение (layout + DI + context)
+```
 
-### Сравнение с PHP/JS (кратко)
+## Прогресс
 
-| Концепция | PHP/JS | Go |
-|-----------|--------|-----|
-| Зависимости | Composer / npm | **Modules** (`go.mod`) |
-| ООП | Классы, extends | **Structs** + **composition** |
-| Полиморфизм | Interfaces (TS), abstract classes | **Interfaces** (неявные) |
-| Ошибки | try/catch, exceptions | `(result, error)` — значение второго класса |
-| Массивы | Array + mutable | **Slice** — view над массивом, ссылочная семантика |
-| null | null / undefined | **nil** только для указателей, slices, maps, interfaces, channels |
-| Generics | TS generics, PHP без них (до 8+) | Generics с Go 1.18+, используют умеренно |
+| Глава | Этап | Статус |
+|-------|------|--------|
+| [Chapter 1](./Chapter1/README.md) | Философия Go: packages, structs, interfaces, errors, slices, generics | ✅ |
+| [Chapter 2](./Chapter2/README.md) | Идиоматичный Go: контракты, errors, layout, DI, context | 📖 текущий |
 
-## Структура материалов
-
-| Файл | Темы |
-|------|------|
-| [01_packages_and_modules.md](./01_packages_and_modules.md) | packages, modules |
-| [02_structs_and_pointers.md](./02_structs_and_pointers.md) | structs, pointers |
-| [03_interfaces_and_composition.md](./03_interfaces_and_composition.md) | interfaces, composition |
-| [04_error_handling_and_defer.md](./04_error_handling_and_defer.md) | error handling, defer |
-| [05_slices_and_maps.md](./05_slices_and_maps.md) | slices, maps |
-| [06_generics.md](./06_generics.md) | generics |
-
-## Запуск примеров
+## Быстрый старт
 
 ```bash
 cd c:\go\STUDY_1
 
-# Каждый пример — отдельная программа
-go run ./examples/01_packages/
-go run ./examples/02_structs/
-go run ./examples/03_interfaces/
-go run ./examples/04_errors/
-go run ./examples/05_collections/
-go run ./examples/06_generics/
+# Глава 1 — любой пример
+go run ./Chapter1/examples/03_interfaces/
+
+# Глава 2 — мини-приложение (рекомендуется после чтения docs)
+go run ./Chapter2/examples/app/cmd/api/
 ```
 
-## Как читать
+## Глава 2 — что внутри
 
-1. Прочитайте `.md` файл — там объяснение и «почему так в Go».
-2. Откройте соответствующий каталог в `examples/` и запустите код.
-3. Меняйте примеры — Go компилируется быстро, экспериментируйте.
+| Тема | Документ |
+|------|----------|
+| Interfaces как контракты | [01_interfaces_as_contracts.md](./Chapter2/01_interfaces_as_contracts.md) |
+| Ошибки как значения | [02_errors_as_values.md](./Chapter2/02_errors_as_values.md) |
+| Wrapping errors | [03_wrapping_errors.md](./Chapter2/03_wrapping_errors.md) |
+| Package design | [04_package_design.md](./Chapter2/04_package_design.md) |
+| DI без контейнеров | [05_dependency_injection.md](./Chapter2/05_dependency_injection.md) |
+| Project layout | [06_project_layout.md](./Chapter2/06_project_layout.md) |
+| context.Context | [07_context.md](./Chapter2/07_context.md) |
 
-## Следующий этап (когда будете готовы)
+## Как учиться
 
-После философии — production-ready паттерны: `context`, HTTP-серверы, тестирование, логирование, конфигурация, graceful shutdown, layout проекта (`cmd/`, `internal/`).
+1. Читайте `.md` в порядке номеров.
+2. Запускайте соответствующий пример в `examples/`.
+3. В конце главы 2 пройдите `Chapter2/examples/app/` — все паттерны в одном месте.
+4. Экспериментируйте: меняйте код, ломайте, чините.
+
+## Module
+
+Единый Go module `study1` (см. [go.mod](./go.mod)). Import path для кода глав:
+
+- `study1/Chapter1/examples/...`
+- `study1/Chapter2/examples/...`
+
+## Следующий этап (глава 3)
+
+HTTP-сервис: router, middleware, structured logging, тесты, graceful shutdown, конфигурация.
