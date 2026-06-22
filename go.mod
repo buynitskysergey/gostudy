@@ -2,7 +2,9 @@ module study1
 
 go 1.22
 
-// Учебный monorepo: Chapter1 (философия Go) + Chapter2 (идиоматичный Go).
-// Import paths:
-//   study1/Chapter1/examples/...
-//   study1/Chapter2/examples/...
+require golang.org/x/sync v0.10.0
+
+// Учебный monorepo:
+//   study1/Chapter1/examples/...  — философия Go
+//   study1/Chapter2/examples/...  — идиоматичный Go
+//   study1/Chapter3/examples/...  — concurrency
