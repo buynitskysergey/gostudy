@@ -32,18 +32,29 @@ func withRWMutex() {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
+			fmt.Println("RLock")
 			mu.RLock()
+			fmt.Println("RLocked")
+			time.Sleep(10 * time.Millisecond)
 			_ = cache["go"]
+			fmt.Println("cache:", cache)
 			mu.RUnlock()
+			fmt.Println("RUnlock")
 		}()
 	}
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		time.Sleep(10 * time.Millisecond)
+		fmt.Println("Lock")
 		mu.Lock()
+		fmt.Println("Locked")
+		fmt.Println("Write to cache")
 		cache["go"] = 2
+		fmt.Println("Written to cache")
+		fmt.Println("Unlock")
 		mu.Unlock()
+		fmt.Println("Unlocked")
 	}()
 	wg.Wait()
 	fmt.Println("cache after RWMutex:", cache)
