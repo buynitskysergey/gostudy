@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+var shouldCancel = true
+
 func main() {
 	fmt.Println("=== Timeout with select ===")
 	ch := make(chan string)
@@ -33,7 +35,9 @@ func main() {
 		}
 		close(done)
 	}()
-	cancel()
+	if shouldCancel {
+		cancel()
+	}
 	<-done
 
 	fmt.Println("\n=== Disable case via nil channel ===")
