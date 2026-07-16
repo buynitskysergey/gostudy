@@ -62,6 +62,7 @@ go run ./examples/app/cmd/api/
 
 [Глава 1 — Философия Go](../Chapter1/README.md)
 
-## Следующий этап
+## Следующие этапы
 
-[Глава 3 — Concurrency](../Chapter3/README.md)
+- [Глава 3 — Concurrency](../Chapter3/README.md)
+- [Глава 4 — Backend на stdlib](../Chapter4/README.md)

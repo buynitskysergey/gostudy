@@ -72,3 +72,7 @@ go run ./examples/app/cmd/processor/
 
 - [Глава 1 — Философия Go](../Chapter1/README.md)
 - [Глава 2 — Идиоматичный Go](../Chapter2/README.md)
+
+## Следующий этап
+
+[Глава 4 — Backend на stdlib](../Chapter4/README.md)

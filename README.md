@@ -10,12 +10,13 @@ study1/
 ├── README.md
 ├── Chapter1/          ← Этап 1: философия языка
 ├── Chapter2/          ← Этап 2: идиоматичный Go
-└── Chapter3/          ← Этап 3: concurrency
+├── Chapter3/          ← Этап 3: concurrency
+└── Chapter4/          ← Этап 4: Backend на stdlib
     ├── README.md
-    ├── 01_…09_*.md
+    ├── 01_…07_*.md
     └── examples/
-        ├── 01_goroutines/ … 09_fan_out_fan_in/
-        └── app/             ← pipeline: fan-out + pool + errgroup
+        ├── 01_net_http/ … 07_configuration/
+        └── app/             ← HTTP API: middleware + JSON + OpenAPI
 ```
 
 ## Прогресс
@@ -24,40 +25,42 @@ study1/
 |-------|------|--------|
 | [Chapter 1](./Chapter1/README.md) | Философия Go: packages, structs, interfaces, errors, slices, generics | ✅ |
 | [Chapter 2](./Chapter2/README.md) | Идиоматичный Go: контракты, errors, layout, DI, context | ✅ |
-| [Chapter 3](./Chapter3/README.md) | Concurrency: goroutines, channels, select, sync, errgroup, worker pool | 📖 текущий |
+| [Chapter 3](./Chapter3/README.md) | Concurrency: goroutines, channels, select, sync, errgroup, worker pool | ✅ |
+| [Chapter 4](./Chapter4/README.md) | Backend на stdlib: net/http, middleware, routing, JSON, validation, OpenAPI, config | 📖 текущий |
 
 ## Быстрый старт
 
 ```bash
 cd c:\go\STUDY_1
 
-# Глава 3 — интеграционный pipeline
-go run ./Chapter3/examples/app/cmd/processor/
+# Глава 4 — HTTP API
+go run ./Chapter4/examples/app/cmd/api/
 
-# Глава 3 — отдельная тема
-go run ./Chapter3/examples/06_errgroup/
+# Глава 4 — отдельная тема
+go run ./Chapter4/examples/02_middleware/
+
+# Глава 3 — pipeline
+go run ./Chapter3/examples/app/cmd/processor/
 ```
 
-## Глава 3 — что внутри
+## Глава 4 — что внутри
 
 | Тема | Документ |
 |------|----------|
-| Goroutines | [01_goroutines.md](./Chapter3/01_goroutines.md) |
-| Channels | [02_channels.md](./Chapter3/02_channels.md) |
-| Select | [03_select.md](./Chapter3/03_select.md) |
-| Mutex / RWMutex | [04_sync_mutex.md](./Chapter3/04_sync_mutex.md) |
-| WaitGroup | [05_waitgroup.md](./Chapter3/05_waitgroup.md) |
-| errgroup | [06_errgroup.md](./Chapter3/06_errgroup.md) |
-| Context cancellation | [07_context_cancellation.md](./Chapter3/07_context_cancellation.md) |
-| Worker pool | [08_worker_pool.md](./Chapter3/08_worker_pool.md) |
-| Fan-out / fan-in | [09_fan_out_fan_in.md](./Chapter3/09_fan_out_fan_in.md) |
+| net/http | [01_net_http.md](./Chapter4/01_net_http.md) |
+| Middleware | [02_middleware.md](./Chapter4/02_middleware.md) |
+| Routing | [03_routing.md](./Chapter4/03_routing.md) |
+| JSON | [04_json.md](./Chapter4/04_json.md) |
+| Validation | [05_validation.md](./Chapter4/05_validation.md) |
+| OpenAPI | [06_openapi.md](./Chapter4/06_openapi.md) |
+| Configuration | [07_configuration.md](./Chapter4/07_configuration.md) |
 
 ## Как учиться
 
 1. Читайте `.md` в порядке номеров.
 2. Запускайте соответствующий пример в `examples/`.
-3. Завершите главу через `Chapter3/examples/app/cmd/processor/`.
-4. Для concurrent кода: `go run -race ./Chapter3/examples/04_mutex/`.
+3. Завершите главу через `Chapter4/examples/app/cmd/api/`.
+4. Сверяйте handlers с `internal/openapi/openapi.yaml`.
 
 ## Module
 
@@ -66,7 +69,8 @@ go run ./Chapter3/examples/06_errgroup/
 - `study1/Chapter1/examples/...`
 - `study1/Chapter2/examples/...`
 - `study1/Chapter3/examples/...`
+- `study1/Chapter4/examples/...`
 
-## Следующий этап (глава 4)
+## Следующий этап (глава 5)
 
-HTTP-сервис: router, middleware, structured logging, тесты, graceful shutdown, конфигурация.
+Тесты, structured logging, observability, graceful patterns в проде.

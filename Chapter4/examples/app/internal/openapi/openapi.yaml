@@ -1,0 +1,118 @@
+openapi: 3.0.3
+info:
+  title: Chapter4 Tasks API
+  version: 1.0.0
+  description: Integration app — net/http, middleware, routing, JSON, validation, config
+paths:
+  /healthz:
+    get:
+      summary: Liveness probe
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+  /openapi.yaml:
+    get:
+      summary: OpenAPI contract
+      responses:
+        "200":
+          description: OpenAPI 3 YAML
+  /api/v1/tasks:
+    get:
+      summary: List tasks
+      responses:
+        "200":
+          description: Task list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+    post:
+      summary: Create task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTask"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "400":
+          description: Invalid JSON or validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/tasks/{id}:
+    get:
+      summary: Get task by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Task
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "404":
+          description: Not found
+    delete:
+      summary: Delete task
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted
+        "404":
+          description: Not found
+components:
+  schemas:
+    CreateTask:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+    Task:
+      type: object
+      required: [id, title, done, created_at]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        done:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        fields:
+          type: object
+          additionalProperties:
+            type: string

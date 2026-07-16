@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: Demo Tasks API
+  version: 1.0.0
+  description: Minimal contract for Chapter 4 OpenAPI example
+paths:
+  /healthz:
+    get:
+      summary: Liveness
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ok
+  /api/v1/tasks:
+    post:
+      summary: Create task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTask"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "400":
+          description: Bad request
+components:
+  schemas:
+    CreateTask:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+    Task:
+      type: object
+      required: [id, title, done]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        done:
+          type: boolean
