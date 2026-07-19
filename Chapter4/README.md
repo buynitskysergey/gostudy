@@ -79,3 +79,7 @@ curl http://localhost:8080/openapi.yaml
 - [Глава 1 — Философия Go](../Chapter1/README.md)
 - [Глава 2 — Идиоматичный Go](../Chapter2/README.md)
 - [Глава 3 — Concurrency](../Chapter3/README.md)
+
+## Следующий этап
+
+- [Глава 5 — Базы данных](../Chapter5/README.md)
